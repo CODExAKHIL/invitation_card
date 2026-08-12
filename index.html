@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Date Proposal ❤️</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Canvas Engine (Stars, Hearts & Bokeh) -->
+    <canvas id="bgCanvas"></canvas>
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Floating Music Controls -->
+    <button id="musicToggle" class="music-toggle" aria-label="Toggle Audio">
+        <span class="music-icon" id="musicIcon">🎵</span>
+        <span class="music-text" id="musicText">Play Music</span>
+    </button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="Hareya-Main-Dil-Hareya.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- ================= SCENE 1: THE DATE QUESTION ================= -->
+        <section id="scene1" class="scene active">
+            <div class="scene-content glass-card scene-1-card">
+                <!-- Cute Dudu & Bubu SVG Illustration -->
+                <div class="character-illustration" id="scene1Illustration">
+                    <svg viewBox="0 0 200 140" class="dudu-bubu-svg">
+                        <!-- Glow effect under couple -->
+                        <ellipse cx="100" cy="120" rx="70" ry="12" fill="rgba(255, 182, 193, 0.25)" />
+                        
+                        <!-- Dudu (Bear) -->
+                        <g class="character dudu floating-gentle">
+                            <!-- Body -->
+                            <ellipse cx="70" cy="85" rx="28" ry="24" fill="#F4E8D1" />
+                            <ellipse cx="70" cy="85" rx="20" ry="16" fill="#FFF8EE" />
+                            <!-- Head -->
+                            <circle cx="70" cy="55" r="26" fill="#F4E8D1" />
+                            <!-- Ears -->
+                            <circle cx="50" cy="35" r="9" fill="#F4E8D1" />
+                            <circle cx="50" cy="35" r="5" fill="#E6CBA8" />
+                            <circle cx="90" cy="35" r="9" fill="#F4E8D1" />
+                            <circle cx="90" cy="35" r="5" fill="#E6CBA8" />
+                            <!-- Eyes -->
+                            <ellipse cx="62" cy="52" rx="3" ry="4" fill="#3D2E2B" />
+                            <ellipse cx="78" cy="52" rx="3" ry="4" fill="#3D2E2B" />
+                            <circle cx="63" cy="50" r="1" fill="#FFF" />
+                            <circle cx="79" cy="50" r="1" fill="#FFF" />
+                            <!-- Blush -->
+                            <ellipse cx="57" cy="58" rx="4" ry="2.5" fill="#FFB3C1" opacity="0.8" />
+                            <ellipse cx="83" cy="58" rx="4" ry="2.5" fill="#FFB3C1" opacity="0.8" />
+                            <!-- Snout & Nose -->
+                            <ellipse cx="70" cy="58" rx="6" ry="4.5" fill="#FFF8EE" />
+                            <ellipse cx="70" cy="56" rx="2.5" ry="1.8" fill="#5C4033" />
+                            <!-- Paws -->
+                            <circle cx="85" cy="80" r="6" fill="#F4E8D1" />
+                        </g>
+
+                        <!-- Floating Heart Between -->
+                        <g class="heart-pulse">
+                            <path d="M100,60 C100,55 94,48 88,52 C82,56 88,66 100,74 C112,66 118,56 112,52 C106,48 100,55 100,60 Z" fill="#FF4D6D" />
+                        </g>
+
+                        <!-- Bubu (Panda/Bunny) -->
+                        <g class="character bubu floating-gentle-delayed">
+                            <!-- Body -->
+                            <ellipse cx="130" cy="85" rx="26" ry="24" fill="#FFFFFF" />
+                            <ellipse cx="130" cy="85" rx="18" ry="16" fill="#FFF0F5" />
+                            <!-- Head -->
+                            <circle cx="130" cy="55" r="25" fill="#FFFFFF" />
+                            <!-- Ears -->
+                            <circle cx="112" cy="35" r="8.5" fill="#3D2E2B" />
+                            <circle cx="148" cy="35" r="8.5" fill="#3D2E2B" />
+                            <!-- Eye Patches -->
+                            <ellipse cx="121" cy="53" rx="6" ry="7" fill="#3D2E2B" transform="rotate(-10 121 53)" />
+                            <ellipse cx="139" cy="53" rx="6" ry="7" fill="#3D2E2B" transform="rotate(10 139 53)" />
+                            <!-- Eyes -->
+                            <circle cx="122" cy="52" r="2.5" fill="#FFFFFF" />
+                            <circle cx="138" cy="52" r="2.5" fill="#FFFFFF" />
+                            <!-- Blush -->
+                            <ellipse cx="116" cy="60" rx="4" ry="2.5" fill="#FF8FA3" opacity="0.9" />
+                            <ellipse cx="144" cy="60" rx="4" ry="2.5" fill="#FF8FA3" opacity="0.9" />
+                            <!-- Nose -->
+                            <polygon points="130,58 128,56 132,56" fill="#FF8FA3" />
+                            <!-- Paws -->
+                            <circle cx="115" cy="80" r="6" fill="#FFFFFF" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="greeting-badge">Special Invitation ✨</div>
+                <h1 class="main-title" id="greetingTitle">Hey <span class="highlight-name" id="herNameDisplay1">Bubu</span> ❤️</h1>
+                <p class="sub-title" id="greetingSubtitle">I have a little question for you...</p>
+                <h2 class="question-title" id="mainQuestion">Will you go on a date with me? 🥺❤️</h2>
+
+                <!-- Emotional Pampering Message Box (Hidden initially) -->
+                <div id="pamperBox" class="pamper-box hidden">
+                    <p id="pamperText" class="pamper-text">Are you sure? 🥺</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button id="yesBtnStep1" class="btn btn-primary pulse-btn">
+                        <span>YES ❤️</span>
+                    </button>
+                    <button id="noBtnStep1" class="btn btn-secondary">
+                        <span id="noBtnText">NO 🙈</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SCENE 2: CHOOSE HER PLACE ================= -->
+        <section id="scene2" class="scene">
+            <div class="scene-header">
+                <div class="step-indicator">Step 1 of 3</div>
+                <h2 class="scene-title">Where should our little adventure begin? 🌙</h2>
+                <p class="scene-subtitle">Pick the place that makes your heart smile</p>
+            </div>
+
+            <div class="cards-grid" id="placesGrid">
+                <!-- Dynamically rendered via JS -->
+            </div>
+
+            <div class="nav-controls">
+                <button id="backBtnScene2" class="btn btn-outline">← Back</button>
+                <button id="nextBtnScene2" class="btn btn-primary" disabled>
+                    <span>Continue → ❤️</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SCENE 3: CHOOSE HER FOOD ================= -->
+        <section id="scene3" class="scene">
+            <div class="scene-header">
+                <div class="step-indicator">Step 2 of 3</div>
+                <h2 class="scene-title">Okay... now the most important question 😋❤️</h2>
+                <p class="scene-subtitle">What should we eat together?</p>
+            </div>
+
+            <div class="cards-grid food-grid" id="foodsGrid">
+                <!-- Dynamically rendered via JS -->
+            </div>
+
+            <div class="nav-controls">
+                <button id="backBtnScene3" class="btn btn-outline">← Back</button>
+                <button id="nextBtnScene3" class="btn btn-primary" disabled>
+                    <span>Continue → ❤️</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SCENE 4: ROMANTIC CALENDAR ================= -->
+        <section id="scene4" class="scene">
+            <div class="scene-header">
+                <div class="step-indicator">Step 3 of 3</div>
+                <h2 class="scene-title">Now choose our special day ❤️</h2>
+                <p class="scene-subtitle">Select a date that works best for you</p>
+            </div>
+
+            <div class="calendar-card glass-card">
+                <div class="calendar-header">
+                    <button id="prevMonthBtn" class="calendar-nav-btn" aria-label="Previous Month">‹</button>
+                    <h3 id="calendarMonthYear" class="calendar-month-title">August 2026</h3>
+                    <button id="nextMonthBtn" class="calendar-nav-btn" aria-label="Next Month">›</button>
+                </div>
+
+                <div class="calendar-weekdays">
+                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+
+                <div id="calendarDays" class="calendar-days-grid">
+                    <!-- Calendar days rendered dynamically -->
+                </div>
+
+                <div id="selectedDateDisplay" class="selected-date-banner hidden">
+                    <span>Our little date is waiting for us on:</span>
+                    <strong id="formattedSelectedDate">--</strong>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <button id="backBtnScene4" class="btn btn-outline">← Back</button>
+                <button id="nextBtnScene4" class="btn btn-primary" disabled>
+                    <span>Seal the Date 💕</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SCENE 5: CINEMATIC PROPOSAL ================= -->
+        <section id="scene5" class="scene">
+            <div class="cinematic-container">
+                <!-- Moon & Glowing Aura -->
+                <div class="moon-wrapper">
+                    <div class="moon"></div>
+                    <div class="moon-glow"></div>
+                </div>
+
+                <div class="proposal-content glass-card">
+                    <div class="date-summary-badge">Our Date Itinerary ❤️</div>
+
+                    <!-- Summary Choices Grid -->
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <span class="summary-icon">📍</span>
+                            <div class="summary-info">
+                                <label>Location</label>
+                                <span id="summaryPlace">--</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <span class="summary-icon">😋</span>
+                            <div class="summary-info">
+                                <label>Treats</label>
+                                <span id="summaryFood">--</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <span class="summary-icon">📅</span>
+                            <div class="summary-info">
+                                <label>Special Day</label>
+                                <span id="summaryDate">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Dudu & Bubu Proposal Animation Stage -->
+                    <div class="proposal-stage" id="proposalStage">
+                        <svg viewBox="0 0 300 160" class="proposal-svg">
+                            <!-- Background hill line -->
+                            <path d="M0,150 Q150,130 300,150 L300,160 L0,160 Z" fill="rgba(255,255,255,0.08)" />
+
+                            <!-- Dudu Character (Left) -->
+                            <g id="duduProposal" class="character-proposal dudu-walk">
+                                <ellipse cx="100" cy="125" rx="22" ry="18" fill="#F4E8D1" />
+                                <circle cx="100" cy="98" r="22" fill="#F4E8D1" />
+                                <circle cx="84" cy="80" r="7" fill="#F4E8D1" />
+                                <circle cx="116" cy="80" r="7" fill="#F4E8D1" />
+                                <ellipse cx="93" cy="95" rx="2.5" ry="3.5" fill="#3D2E2B" />
+                                <ellipse cx="107" cy="95" rx="2.5" ry="3.5" fill="#3D2E2B" />
+                                <ellipse cx="88" cy="100" rx="3.5" ry="2" fill="#FFB3C1" />
+                                <ellipse cx="112" cy="100" rx="3.5" ry="2" fill="#FFB3C1" />
+                                <ellipse cx="100" cy="100" rx="5" ry="3.5" fill="#FFF8EE" />
+                                <ellipse cx="100" cy="98" rx="2" ry="1.2" fill="#5C4033" />
+                                <!-- Arm holding Rose/Heart -->
+                                <path id="duduArm" d="M115,115 Q130,110 138,108" stroke="#F4E8D1" stroke-width="6" stroke-linecap="round" />
+                                <path d="M138,108 C138,103 143,100 147,103 C151,106 145,113 138,118 C131,113 125,106 129,103 C133,100 138,103 138,108 Z" fill="#FF2E63" />
+                            </g>
+
+                            <!-- Bubu Character (Right) -->
+                            <g id="bubuProposal" class="character-proposal bubu-wait">
+                                <ellipse cx="200" cy="125" rx="20" ry="18" fill="#FFFFFF" />
+                                <circle cx="200" cy="98" r="21" fill="#FFFFFF" />
+                                <circle cx="185" cy="80" r="7" fill="#3D2E2B" />
+                                <circle cx="215" cy="80" r="7" fill="#3D2E2B" />
+                                <ellipse cx="193" cy="96" rx="5" ry="6" fill="#3D2E2B" transform="rotate(-10 193 96)" />
+                                <ellipse cx="207" cy="96" rx="5" ry="6" fill="#3D2E2B" transform="rotate(10 207 96)" />
+                                <circle cx="194" cy="95" r="2" fill="#FFFFFF" />
+                                <circle cx="206" cy="95" r="2" fill="#FFFFFF" />
+                                <ellipse cx="188" cy="102" rx="3.5" ry="2" fill="#FF8FA3" />
+                                <ellipse cx="212" cy="102" rx="3.5" ry="2" fill="#FF8FA3" />
+                            </g>
+
+                            <!-- Hug/Love Burst Graphic (Initially hidden) -->
+                            <g id="loveBurstGraphic" class="love-burst hidden">
+                                <circle cx="150" cy="95" r="30" fill="url(#roseGlow)" opacity="0.6" />
+                                <path d="M150,85 C150,75 135,65 125,75 C115,85 125,100 150,115 C175,100 185,85 175,75 C165,65 150,75 150,85 Z" fill="#FF0055" />
+                            </g>
+
+                            <defs>
+                                <radialGradient id="roseGlow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FF4D6D" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#FF4D6D" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <div id="preProposalText" class="proposal-text-block">
+                        <p class="cinematic-tagline">One final question before we seal our plans...</p>
+                        <h2 class="final-proposal-heading">Will you make this date a beautiful memory with me? ❤️</h2>
+                        <button id="finalYesBtn" class="btn btn-primary btn-giant pulse-btn">
+                            <span>YES, I WILL ❤️</span>
+                        </button>
+                    </div>
+
+                    <!-- Final Celebration State (Revealed after clicking Final YES) -->
+                    <div id="postProposalBlock" class="post-proposal-block hidden">
+                        <div class="sparkle-title">It's Officially A Date! 🎉❤️</div>
+                        <p class="final-message-p">
+                            "Just you, me, and one beautiful memory waiting to happen." 🥹✨
+                        </p>
+                        <div class="custom-note" id="customNoteDisplay">
+                            Made with all my love, especially for you, <span id="herNameDisplay2">Bubu</span> ❤️
+                        </div>
+
+                        <button id="restartBtn" class="btn btn-outline btn-restart">
+                            <span>Experience Again ↻</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Developer Credit Footer -->
+    <footer class="dev-footer">
+        <span>Developed by</span>
+        <a href="https://instagram.com/mvp.akhil" target="_blank" rel="noopener noreferrer" class="insta-link">
+            <svg class="insta-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>mvp.akhil</span>
+        </a>
+    </footer>
+
+
+
+
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
